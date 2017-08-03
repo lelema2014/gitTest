@@ -1,0 +1,67 @@
+git diff readme.txt		查看工作区和版本库里面最新版本的区别，也可以用命令：git diff HEAD -- readme.txt
+git log --pretty=oneline		一行显示提交版本的日志
+git reset --hard HEAD^		回退到上一个版本
+	在Git中，用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，往上100个版本即是写成HEAD~100
+git reset --hard b33958e6ea		将HEAD指向commit id为b33958e6ea的版本
+git reflog		记录每次版本修改的历史
+git checkout -- readme.txt		丢弃工作区的修改
+git reset HEAD readme.txt		将暂存区的内容撤回到工作区
+删除文件：
+	1）在本地删除文件；
+	2）git rm temp.txt
+	3）git commit -m "remove temp.txt"
+ssh-keygen -t rsa -C "80195554@qq.com"		在用户主目录生成ssh公钥和私钥
+git remote add origin git@github.com:lelema2014/gitTest.git		本地库与远程库建立关联
+git push -u origin master		把当前分支master推送到远程；第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+git checkout -b dev		-b：创建并切换到dev分支
+						即：git branch dev
+							git checkout dev
+git branch		查看当前分支和所有分支
+git merge dev		合并制定的分支到当前分支
+git branch -d dev		删除分支
+git log --graph --pretty=oneline --abbrev-commit		图形查看分支合并的情况
+														--graph命令可以看到分支合并图
+
+
+
+
+自动创建的第一个分支master
+远程库的名字就是origin
+用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，往上100个版本即是写成HEAD~100
+
+
+
+解决冲突：
+Administrator@AFOHQ-608280756 MINGW64 /e/work/git/gitTest (master)
+$ git merge feature1
+Auto-merging readme.txt
+CONFLICT (content): Merge conflict in readme.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Administrator@AFOHQ-608280756 MINGW64 /e/work/git/gitTest (master|MERGING)
+$ git add readme.txt
+
+Administrator@AFOHQ-608280756 MINGW64 /e/work/git/gitTest (master|MERGING)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+        modified:   readme.txt
+
+
+Administrator@AFOHQ-608280756 MINGW64 /e/work/git/gitTest (master|MERGING)
+$ git commit -m "conflict fixed"
+[master 55d6be1] conflict fixed
+
+Administrator@AFOHQ-608280756 MINGW64 /e/work/git/gitTest (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working directory clean
+
