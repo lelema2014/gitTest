@@ -21,14 +21,51 @@ git merge dev		合并制定的分支到当前分支
 git branch -d dev		删除分支
 git log --graph --pretty=oneline --abbrev-commit		图形查看分支合并的情况
 														--graph命令可以看到分支合并图
+git merge --no-ff -m "merge with no-ff" dev		将dev分支合并入当前分支，不使用fast forward模式合并
+git stash		把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+git stash list		查看暂存区的内容
+恢复暂存区的内容：
+	方法1、git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+	方法2、git stash pop，恢复的同时把stash内容也删了
+	方法3、当多次暂存时，使用git stash apply stash@{0}恢复暂存区内指定的内容
+git branch -D feature-vulcan		强制删除分支，如果某个分支没有被合并过，再删除这个分支时，需要使用-D才能成功删除该分支
+git remote		查看远程库的信息
+git remote -v		显示更详细的信息，如
+					$ git remote -v
+					origin  git@github.com:michaelliao/learngit.git (fetch)
+					origin  git@github.com:michaelliao/learngit.git (push)
+					如果没有推送权限，就看不到push的地址
+git push origin master		把master分支上的所有本地提交推送到远程库master分支
+git branch --set-upstream dev origin/dev		指定本地dev分支与远程origin/dev分支的链接
+创建标签；
+	步骤1、切换到需要打标签的分支上
+	步骤2、git tag v1.0 		在当前commit上打标签
+		或者 git tag v0.9 6224937		在6224937的commit上打标签
+		或者 git tag -a v0.1 -m "version 0.1 released" 3628164		-a指定标签名，-m指定说明文字
+		或者 git tag -s v0.2 -m "signed version 0.2 released" fec145a		-s用私钥PGP签名一个标签
+git tag		查看标签
+git show v0.9		查看v0.9标签的信息
+git tag -d v0.1		删除本地标签v0.1
+git push origin v1.0		推送标签v1.0到远程
+git push origin --tags		一次性推送全部尚未推送到远程的本地标签
+删除远程标签:
+	步骤1、git tag -d v0.9		先删除本地标签
+	步骤2、git push origin :refs/tags/v0.9		再删除远程标签
+					
 
 
-
+===============================================================================
 
 自动创建的第一个分支master
-远程库的名字就是origin
+远程仓库的默认名称是origin
 用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，往上100个版本即是写成HEAD~100
+当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了
 
+合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
+
+
+===============================================================================
 
 
 解决冲突：
