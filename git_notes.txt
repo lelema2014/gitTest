@@ -13,6 +13,17 @@ $ export GIT_EDITOR=vim
 $ git config user.name "jiarui"
 $ git config user.email "aaa@qq.com"
 
+提交代码：
+如果使用过git add命令将某个文件添加到版本库，那么若之后该文件有修改，不需要再使用git add命令将修改的内容提交到暂存区，而是可以直接使用git commit filename.txt命令，提交修改的内容，因为在此种情况下，当在命令行里直接提交一个文件时，文件的变更会被自动捕捉
+
+查看提交日志：
+$ git log		列出当前分支的提交记录
+$ git log filename.txt		列出指定文件filename.txt的提交记录
+
+查看提交的内容：
+$ git show b934c88a4c		显示指定commit提交的内容
+$ git show		显示最近一次提交的内容
+
 =======================================================================
 
 
