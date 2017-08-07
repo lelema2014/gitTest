@@ -1,3 +1,21 @@
+git命令帮助信息：
+1）$ git		获取简单的帮助信息
+2）$ git help --all		获得完整的git子命令列表
+3）$ git push --help		获得某个子命令的帮助信息
+
+查看git版本：
+$ git --version
+
+--		裸双破折号的作用是分离一系列参数，比如分离文件名
+
+设置环境变量：
+$ export GIT_EDITOR=vim
+$ git config user.name "jiarui"
+$ git config user.email "aaa@qq.com"
+
+=======================================================================
+
+
 git diff readme.txt		查看工作区和版本库里面最新版本的区别，也可以用命令：git diff HEAD -- readme.txt
 git log --pretty=oneline		一行显示提交版本的日志
 git reset --hard HEAD^		回退到上一个版本
